@@ -17,7 +17,7 @@ export const useBeverageStore = defineStore("BeverageStore", {
     currentBase: base[0],
     currentCreamer: creamer[1],
     currentSyrup: syrup[1],
-    currentName: null as string | null,
+    currentName: "",
   }),
   actions: {
     makeBeverage(name: string, temp: string, base: BaseBeverageType, creamer: CreamerType, syrup: SyrupType) {
