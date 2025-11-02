@@ -59,6 +59,29 @@
         </template>
       </li>
     </ul>
+    <div>
+      <input type="text" v-model="beverageStore.currentName" placeholder="Beverage Name">
+      <button @click="beverageStore.makeBeverage(beverageStore.currentName, beverageStore.currentTemp, beverageStore.currentBase, beverageStore.currentCreamer, beverageStore.currentSyrup)">Make Beverage</button>
+    </div>
+    <div id="beverage-container">
+      <ul>
+        <li>
+          <template v-for="bev in beverageStore.beverages" :key="bev.id">
+            <label>
+              <input 
+                type="radio"
+                name="bevs"
+                :id="`r${bev.id}`"
+                :value="bev"
+                @change="beverageStore.showBeverage(bev)"
+                v-model="beverageStore.currentBev"
+              />
+              {{ bev.name }}
+            </label>
+          </template>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -66,7 +89,6 @@
 import Beverage from "./components/Beverage.vue";
 import { useBeverageStore } from './stores/beverageStore';
 const beverageStore = useBeverageStore();
-beverageStore.$subscribe((mutation, state) => {});
 </script>
 
 <style lang="scss">

@@ -17,10 +17,31 @@ export const useBeverageStore = defineStore("BeverageStore", {
     currentBase: base[0],
     currentCreamer: creamer[1],
     currentSyrup: syrup[1],
+    currentName: null as string | null,
   }),
   actions: {
-    makeBeverage() {},
-    showBeverage() {},
+    makeBeverage(name: string, temp: string, base: BaseBeverageType, creamer: CreamerType, syrup: SyrupType) {
+      const index = this.beverages.findIndex(bev => bev.id === (base.id + "-" + creamer.id + "-" + syrup.id + "-" + name));
+      if(index === -1) {
+        var currentBev = {
+          id: base.id + "-" + creamer.id + "-" + syrup.id + "-" + name,
+          name: name,
+          temp: temp,
+          base: base,
+          syrup: syrup,
+          creamer: creamer,
+        };
+        this.beverages.push(currentBev);}
+      else {currentBev = this.beverages[index]}
+    },
+    showBeverage(b: BeverageType) {
+      this.currentBase = b.base;
+      this.currentCreamer = b.creamer;
+      this.currentSyrup = b.syrup;
+      this.currentTemp = b.temp;
+      this.currentBev = b;
+      this.currentName = b.name;
+    },
   },
   persist: true,
 });
