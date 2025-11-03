@@ -43,5 +43,5 @@ export const useBeverageStore = defineStore("BeverageStore", {
       this.currentName = b.name;
     },
   },
-  persist: true,
+  persist: false,
 });
